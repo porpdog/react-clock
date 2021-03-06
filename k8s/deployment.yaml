@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-clock-basic
+  name: react-clock
 spec:
   selector:
       matchLabels:
-        app: react-clock-basic
+        app: react-clock
   replicas: 3
   template:
       metadata:
         labels:
-            app: react-clock-basic
+            app: react-clock
       spec:
         containers:
-        - name: react-clock-basic
-          image: boyercontainerregistry.azurecr.io/react-clock-basic:v1
+        - name: react-clock
+          image: boyercontainerregistry.azurecr.io/react-clock:v1
           imagePullPolicy: Always
           readinessProbe:
             httpGet:
