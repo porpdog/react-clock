@@ -8,15 +8,17 @@ This is a fork of this clock app that includes deployments for Azure Kubernetes 
 In Azure cloud shell:
 
 ```
-git clone https://github.com/jaydestro/react-clock-basic.git
+git clone https://github.com/porpdog/react-clock.git
 
-az group create  --name $NAME --location eastus
+az group create  --name container-group --location eastus
 
-az network vnet create --name $nameVNET --resource-group $NAME  --subnet-name default
+az network vnet create --name containerClockVNET --resource-group container-group  --subnet-name default
 
-az acr create --resource-group $NAME--name $NAMEacr --sku Basic --admin-enabled true
+az acr create --resource-group container-group --name boyercontainerregistry --sku Basic --admin-enabled true
 
-az acr build  --registry $NAMEacr --image react-clock-basic:v1 .
+az aks create --resource-group container-group --name boyuerakscluster --node-count 1 --enable-addons monitoring --generate-ssh-keys
+
+az acr build  --registry boyercontainerregistry --image react-clock:v1 .
 ```
 
 Go to portal in Azure, create a new app service, select your resource group, pick linux, pick docker container, create a new service plan, select dev/test - click Docker
