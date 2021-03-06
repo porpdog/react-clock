@@ -19,6 +19,10 @@ az acr create --resource-group container-group --name boyercontainerregistry --s
 az aks create --resource-group container-group --name boyuerakscluster --node-count 1 --enable-addons monitoring --generate-ssh-keys
 
 az acr build  --registry boyercontainerregistry --image react-clock:v1 .
+
+In k8s directory, run 'kubectl apply -f ./deployment.yaml'
+Then run run 'kubectl apply -f ./loadbalancer.yaml'
+'kubectl get services'
 ```
 
 Go to portal in Azure, create a new app service, select your resource group, pick linux, pick docker container, create a new service plan, select dev/test - click Docker
